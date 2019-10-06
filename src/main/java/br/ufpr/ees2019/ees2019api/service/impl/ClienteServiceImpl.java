@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.ufpr.ees2019.ees2019api.converter.ClienteConverter;
 import br.ufpr.ees2019.ees2019api.domain.Cliente;
@@ -11,6 +12,7 @@ import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
 import br.ufpr.ees2019.ees2019api.repository.ClienteRepository;
 import br.ufpr.ees2019.ees2019api.service.ClienteService;
 
+@Service
 public class ClienteServiceImpl implements ClienteService {
 	
 	@Autowired

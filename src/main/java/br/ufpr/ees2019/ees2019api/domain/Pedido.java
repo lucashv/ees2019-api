@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "t_pedido")
 public class Pedido {
 	@Id
-	@SequenceGenerator(name = "seq_pedido", sequenceName = "seq_pedido")
+	@SequenceGenerator(name = "seq_pedido", sequenceName = "seq_pedido", allocationSize = 1 )
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pedido")
 	@Column(name = "id")
 	private Integer id;

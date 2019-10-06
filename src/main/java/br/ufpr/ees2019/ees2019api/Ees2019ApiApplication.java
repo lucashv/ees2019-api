@@ -2,14 +2,10 @@ package br.ufpr.ees2019.ees2019api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({
-	"br.ufpr.ees2019.ees2019api.repository",
-	"br.ufpr.ees2019.ees2019api.service",
-	"br.ufpr.ees2019.ees2019api.converter"
-})
+@EnableJpaRepositories
 public class Ees2019ApiApplication {
 
 	public static void main(String[] args) {

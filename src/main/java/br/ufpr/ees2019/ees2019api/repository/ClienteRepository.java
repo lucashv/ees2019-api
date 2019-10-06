@@ -7,4 +7,5 @@ import br.ufpr.ees2019.ees2019api.domain.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+	
 }

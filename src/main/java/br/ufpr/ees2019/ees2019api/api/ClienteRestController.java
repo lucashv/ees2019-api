@@ -14,7 +14,7 @@ import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
 import br.ufpr.ees2019.ees2019api.service.ClienteService;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/api/cliente")
 public class ClienteRestController {
 	@Autowired
 	private ClienteService clienteService;
