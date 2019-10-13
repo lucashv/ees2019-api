@@ -22,7 +22,7 @@ public class Pedido {
 	@SequenceGenerator(name = "seq_pedido", sequenceName = "seq_pedido", allocationSize = 1 )
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pedido")
 	@Column(name = "id")
-	private Integer id;
+	private Long id;
 	@Column(name = "data")
 	private Date data;
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -31,10 +31,10 @@ public class Pedido {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido")
 	private List<ItemPedido> itens;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Date getData() {

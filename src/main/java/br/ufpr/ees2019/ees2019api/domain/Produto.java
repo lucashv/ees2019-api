@@ -15,14 +15,14 @@ public class Produto {
 	@SequenceGenerator(name = "seq_produto", sequenceName = "seq_produto", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
 	@Column(name = "id")
-	private Integer id;
+	private Long id;
 	@Column(name = "descricao")
 	private String descricao;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getDescricao() {

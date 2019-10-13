@@ -1,15 +1,15 @@
 package br.ufpr.ees2019.ees2019api.dto;
 
 public class ClienteDTO {
-	private Integer id;
+	private Long id;
 	private String cpf;
 	private String nome;
 	private String sobrenome;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getCpf() {

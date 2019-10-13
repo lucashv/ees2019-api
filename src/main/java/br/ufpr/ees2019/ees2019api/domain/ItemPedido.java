@@ -18,7 +18,7 @@ public class ItemPedido {
 	@SequenceGenerator(name = "seq_item_pedido", sequenceName = "seq_item_pedido", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_item_pedido")
 	@Column(name = "id")
-	private Integer id;
+	private Long id;
 	@Column(name = "quantidade")
 	private Integer quantidade;
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -28,10 +28,10 @@ public class ItemPedido {
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Integer getQuantidade() {
