@@ -15,7 +15,7 @@ import br.ufpr.ees2019.ees2019api.repository.ClienteRepository;
 import br.ufpr.ees2019.ees2019api.security.DetalheUsuario;
 import br.ufpr.ees2019.ees2019api.service.ClienteService;
 
-@Service
+@Service(value = "clienteService")
 public class ClienteServiceImpl implements ClienteService {
 	
 	@Autowired

@@ -19,14 +19,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic()
-			.and()
-			.authorizeRequests()
-			.antMatchers(HttpMethod.GET, "/api/**").hasRole("USER")
-			.antMatchers(HttpMethod.POST, "/api/**").hasRole("USER")
-			.antMatchers(HttpMethod.PUT, "/api/**").hasRole("USER")
-			.antMatchers(HttpMethod.PATCH, "/api/**").hasRole("USER")
-			.antMatchers(HttpMethod.DELETE, "/api/**").hasRole("USER")
+		http.authorizeRequests()
+			.antMatchers(HttpMethod.POST, "/login").permitAll()
+			.anyRequest().authenticated()
 			.and()
 			.csrf().disable()
 			.formLogin().disable();
