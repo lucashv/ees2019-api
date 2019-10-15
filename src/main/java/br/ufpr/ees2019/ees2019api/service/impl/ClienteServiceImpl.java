@@ -24,10 +24,15 @@ public class ClienteServiceImpl implements ClienteService {
 	private ClienteRepository clienteRepo;
 	
 	@Override
-	public ClienteDTO salvar(Cliente cliente) {		
+	public ClienteDTO salvar(ClienteDTO clienteDTO) {
+		Cliente cliente = clienteConverter.convertToDomain(clienteDTO);
 		return clienteConverter.convertToDto(clienteRepo.save(cliente));
 	}
 
+	public void excluir(Long id) {
+		clienteRepo.deleteById(id);
+	}
+	
 	@Override
 	public List<ClienteDTO> getAll() {
 		return clienteRepo.findAll().stream()
@@ -36,7 +41,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public ClienteDTO findById(Integer id) {
+	public ClienteDTO findById(Long id) {
 		return clienteRepo.findById(id)
 					.map(clienteConverter::convertToDto)
 					.orElse(null);
