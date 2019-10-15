@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
+import br.ufpr.ees2019.ees2019api.service.exception.ClienteTemPedidosException;
+import br.ufpr.ees2019.ees2019api.service.exception.ServiceException;
 
 public interface ClienteService extends UserDetailsService {
-	public ClienteDTO salvar(ClienteDTO cliente);
-	public List<ClienteDTO> getAll();
-	public ClienteDTO findById(Long id);
+	ClienteDTO salvar(ClienteDTO cliente) throws ServiceException;
+	void excluir(Long id) throws ClienteTemPedidosException, ServiceException;
+	List<ClienteDTO> retornarTodos() throws ServiceException;
+	ClienteDTO retornarPorId(Long id) throws ServiceException;
 }

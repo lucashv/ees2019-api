@@ -14,6 +14,8 @@ import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
 import br.ufpr.ees2019.ees2019api.repository.ClienteRepository;
 import br.ufpr.ees2019.ees2019api.security.DetalheUsuario;
 import br.ufpr.ees2019.ees2019api.service.ClienteService;
+import br.ufpr.ees2019.ees2019api.service.exception.ClienteTemPedidosException;
+import br.ufpr.ees2019.ees2019api.service.exception.ServiceException;
 
 @Service(value = "clienteService")
 public class ClienteServiceImpl implements ClienteService {
@@ -24,27 +26,48 @@ public class ClienteServiceImpl implements ClienteService {
 	private ClienteRepository clienteRepo;
 	
 	@Override
-	public ClienteDTO salvar(ClienteDTO clienteDTO) {
-		Cliente cliente = clienteConverter.convertToDomain(clienteDTO);
-		return clienteConverter.convertToDto(clienteRepo.save(cliente));
+	public ClienteDTO salvar(ClienteDTO clienteDTO) throws ServiceException {
+		try {
+			Cliente cliente = clienteConverter.convertToDomain(clienteDTO);
+			return clienteConverter.convertToDto(clienteRepo.save(cliente));
+		} catch(Exception ex) {
+			throw new ServiceException(ex);
+		}
 	}
 
-	public void excluir(Long id) {
-		clienteRepo.deleteById(id);
+	public void excluir(Long id) throws ClienteTemPedidosException, ServiceException {
+		try {
+			Cliente c = clienteRepo.findById(id).orElse(null);
+			
+			if (c != null && c.getPedidos() != null && c.getPedidos().size() > 0)
+				throw new ClienteTemPedidosException(c);
+			
+			clienteRepo.deleteById(id);
+		} catch(Exception ex) {
+			throw new ServiceException(ex);
+		}
 	}
 	
 	@Override
-	public List<ClienteDTO> getAll() {
-		return clienteRepo.findAll().stream()
-						.map(clienteConverter::convertToDto)
-						.collect(Collectors.toList());
+	public List<ClienteDTO> retornarTodos() throws ServiceException {
+		try {
+			return clienteRepo.findAll().stream()
+							.map(clienteConverter::convertToDto)
+							.collect(Collectors.toList());
+		} catch(Exception ex) {
+			throw new ServiceException(ex);
+		}
 	}
 
 	@Override
-	public ClienteDTO findById(Long id) {
-		return clienteRepo.findById(id)
-					.map(clienteConverter::convertToDto)
-					.orElse(null);
+	public ClienteDTO retornarPorId(Long id) throws ServiceException {
+		try {
+			return clienteRepo.findById(id)
+						.map(clienteConverter::convertToDto)
+						.orElse(null);
+		} catch(Exception ex) {
+			throw new ServiceException(ex);
+		}
 	}
 
 	@Override
