@@ -1,12 +1,13 @@
 package br.ufpr.ees2019.ees2019api.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import br.ufpr.ees2019.ees2019api.converter.ClienteConverter;
 import br.ufpr.ees2019.ees2019api.domain.Cliente;
@@ -14,7 +15,8 @@ import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
 import br.ufpr.ees2019.ees2019api.repository.ClienteRepository;
 import br.ufpr.ees2019.ees2019api.security.DetalheUsuario;
 import br.ufpr.ees2019.ees2019api.service.ClienteService;
-import br.ufpr.ees2019.ees2019api.service.exception.ClienteTemPedidosException;
+import br.ufpr.ees2019.ees2019api.service.exception.ClienteNaoEncontradoServiceException;
+import br.ufpr.ees2019.ees2019api.service.exception.ClienteTemPedidosServiceException;
 import br.ufpr.ees2019.ees2019api.service.exception.ServiceException;
 
 @Service(value = "clienteService")
@@ -27,47 +29,34 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	@Override
 	public ClienteDTO salvar(ClienteDTO clienteDTO) throws ServiceException {
-		try {
-			Cliente cliente = clienteConverter.convertToDomain(clienteDTO);
-			return clienteConverter.convertToDto(clienteRepo.save(cliente));
-		} catch(Exception ex) {
-			throw new ServiceException(ex);
-		}
+		Cliente cliente = clienteConverter.convertToDomain(clienteDTO);
+		return clienteConverter.convertToDto(clienteRepo.save(cliente));
 	}
 
-	public void excluir(Long id) throws ClienteTemPedidosException, ServiceException {
-		try {
-			Cliente c = clienteRepo.findById(id).orElse(null);
-			
-			if (c != null && c.getPedidos() != null && c.getPedidos().size() > 0)
-				throw new ClienteTemPedidosException(c);
-			
-			clienteRepo.deleteById(id);
-		} catch(Exception ex) {
-			throw new ServiceException(ex);
-		}
+	public void excluir(Long id) throws ClienteTemPedidosServiceException, ServiceException {		
+		Cliente c = clienteRepo.findById(id).orElse(null);
+		
+		if (c != null && c.getPedidos() != null && c.getPedidos().size() > 0)
+			throw new ClienteTemPedidosServiceException(c);
+		
+		clienteRepo.deleteById(id);		
 	}
 	
 	@Override
-	public List<ClienteDTO> retornarTodos() throws ServiceException {
-		try {
-			return clienteRepo.findAll().stream()
-							.map(clienteConverter::convertToDto)
-							.collect(Collectors.toList());
-		} catch(Exception ex) {
-			throw new ServiceException(ex);
-		}
+	public List<ClienteDTO> retornarTodos() throws ServiceException {		
+		return clienteRepo.findAll()
+		                .stream()
+						.map(clienteConverter::convertToDto)
+						.collect(Collectors.toList());		
 	}
 
 	@Override
-	public ClienteDTO retornarPorId(Long id) throws ServiceException {
-		try {
-			return clienteRepo.findById(id)
-						.map(clienteConverter::convertToDto)
-						.orElse(null);
-		} catch(Exception ex) {
-			throw new ServiceException(ex);
-		}
+	public ClienteDTO retornarPorId(Long id) 
+	        throws ClienteNaoEncontradoServiceException, ServiceException {		
+	    Cliente cliente = 
+	            clienteRepo.findById(id)
+                           .orElseThrow(() -> new ClienteNaoEncontradoServiceException(id));
+		return clienteConverter.convertToDto(cliente);
 	}
 
 	@Override
