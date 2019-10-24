@@ -25,7 +25,7 @@ import br.ufpr.ees2019.ees2019api.domain.Pedido;
 import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
 import br.ufpr.ees2019.ees2019api.dto.PedidoDTO;
 import br.ufpr.ees2019.ees2019api.repository.ClienteRepository;
-import br.ufpr.ees2019.ees2019api.service.exception.ClienteNaoEncontradoServiceException;
+import br.ufpr.ees2019.ees2019api.service.exception.EntidadeNaoEncontradaServiceException;
 import br.ufpr.ees2019.ees2019api.service.exception.ClienteTemPedidosServiceException;
 import br.ufpr.ees2019.ees2019api.service.impl.ClienteServiceImpl;
 
@@ -74,7 +74,7 @@ public class ClienteServiceTest {
         assertTrue(clienteDTO != null && clienteDTO.getId().equals(1L));
     }
     
-    @Test(expected = ClienteNaoEncontradoServiceException.class)
+    @Test(expected = EntidadeNaoEncontradaServiceException.class)
     public void naoDeveRetornarNenhumClientePorId() throws Exception {
         when(clienteRepository.findById(1L))
             .thenReturn(Optional.empty());
