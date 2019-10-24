@@ -16,6 +16,7 @@ public class ClienteConverter implements Convertable<Cliente, ClienteDTO> {
 		entity.setCpf(dto.getCpf());
 		entity.setNome(dto.getNome());		
 		entity.setSobrenome(dto.getSobrenome());
+		entity.setEmail(dto.getEmail());
 		
 		return entity;
 	}
@@ -28,6 +29,7 @@ public class ClienteConverter implements Convertable<Cliente, ClienteDTO> {
 		dto.setCpf(entity.getCpf());
 		dto.setNome(entity.getNome());		
 		dto.setSobrenome(entity.getSobrenome());
+		dto.setEmail(entity.getEmail());
 		
 		return dto;
 	}
