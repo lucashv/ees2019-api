@@ -1,8 +1,11 @@
 package br.ufpr.ees2019.ees2019api.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.ufpr.ees2019.ees2019api.domain.Produto;
 import br.ufpr.ees2019.ees2019api.dto.ProdutoDTO;
 
+@Component
 public class ProdutoConverter implements Convertable<Produto, ProdutoDTO> {
 
     @Override

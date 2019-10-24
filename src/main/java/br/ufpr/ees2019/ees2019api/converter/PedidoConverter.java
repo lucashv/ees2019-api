@@ -1,8 +1,11 @@
 package br.ufpr.ees2019.ees2019api.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.ufpr.ees2019.ees2019api.domain.Pedido;
 import br.ufpr.ees2019.ees2019api.dto.PedidoDTO;
 
+@Component
 public class PedidoConverter implements Convertable<Pedido, PedidoDTO> {
 
     @Override
