@@ -45,6 +45,15 @@ public class ClienteServiceImpl extends BaseServiceImpl<ClienteDTO, Cliente, Lon
                                 .collect(Collectors.toList());
     }
     
+    @Override
+    public List<ClienteDTO> buscarPorNome(String nome) {
+        return this.clienteRepo.findByNomeContaining(nome)
+                                .orElse(Collections.emptyList())
+                                .stream()
+                                .map(clienteConverter::convertToDto)
+                                .collect(Collectors.toList());
+    }
+    
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return clienteRepo.findOneByEmail(username)

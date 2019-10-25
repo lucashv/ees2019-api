@@ -33,4 +33,13 @@ public class ClienteRestController extends BaseRestController<ClienteDTO, Long> 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("/pornome/{nome}")
+    public ResponseEntity<List<ClienteDTO>> buscarPorNome(@PathVariable("nome") String nome) {
+        try {
+            return ResponseEntity.ok(this.clienteService.buscarPorNome(nome));
+        } catch(Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -12,4 +12,5 @@ import br.ufpr.ees2019.ees2019api.domain.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	Optional<Cliente> findOneByEmail(String email);
 	Optional<List<Cliente>> findByCpfContaining(String cpf);
+	Optional<List<Cliente>> findByNomeContaining(String nome);
 }

@@ -8,4 +8,5 @@ import br.ufpr.ees2019.ees2019api.dto.ClienteDTO;
 
 public interface ClienteService extends BaseService<ClienteDTO, Long>, UserDetailsService {
     List<ClienteDTO> buscarPorCPF(String cpf);
+    List<ClienteDTO> buscarPorNome(String nome);
 }
