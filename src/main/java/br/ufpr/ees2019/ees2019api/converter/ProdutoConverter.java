@@ -27,7 +27,7 @@ public class ProdutoConverter implements Convertable<Produto, ProdutoDTO> {
         dto.setNome(entity.getNome());
         dto.setDescricao(entity.getDescricao());
         
-        return null;
+        return dto;
     }
 
 }

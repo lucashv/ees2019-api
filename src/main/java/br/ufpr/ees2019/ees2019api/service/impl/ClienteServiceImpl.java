@@ -6,6 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.ufpr.ees2019.ees2019api.converter.ClienteConverter;
 import br.ufpr.ees2019.ees2019api.converter.Convertable;
 import br.ufpr.ees2019.ees2019api.domain.Cliente;
@@ -32,6 +36,15 @@ public class ClienteServiceImpl extends BaseServiceImpl<ClienteDTO, Cliente, Lon
         return this.clienteRepo;
     }	        
 	
+    @Override
+    public List<ClienteDTO> buscarPorCPF(String cpf) {
+        return this.clienteRepo.findByCpfContaining(cpf)
+                                .orElse(Collections.emptyList())
+                                .stream()
+                                .map(clienteConverter::convertToDto)
+                                .collect(Collectors.toList());
+    }
+    
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return clienteRepo.findOneByEmail(username)

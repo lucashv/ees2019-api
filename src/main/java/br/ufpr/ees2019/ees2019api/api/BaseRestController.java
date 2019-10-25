@@ -35,9 +35,9 @@ public abstract class BaseRestController<TDTO, TID> {
     }
     
     @PostMapping
-    public ResponseEntity<TDTO> salvar(@RequestBody TDTO clienteDto) {
+    public ResponseEntity<TDTO> salvar(@RequestBody TDTO dto) {
         try {
-            return ResponseEntity.ok(this.getService().salvar(clienteDto));
+            return ResponseEntity.ok(this.getService().salvar(dto));
         } catch(Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
