@@ -10,13 +10,23 @@ public class ProdutoConverter implements Convertable<Produto, ProdutoDTO> {
 
     @Override
     public Produto convertToDomain(ProdutoDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
+        Produto entity = new Produto();
+        
+        entity.setId(dto.getId());
+        entity.setNome(dto.getNome());
+        entity.setDescricao(dto.getDescricao());
+        
+        return entity;
     }
 
     @Override
     public ProdutoDTO convertToDto(Produto entity) {
-        // TODO Auto-generated method stub
+        ProdutoDTO dto = new ProdutoDTO();
+        
+        dto.setId(entity.getId());
+        dto.setNome(entity.getNome());
+        dto.setDescricao(entity.getDescricao());
+        
         return null;
     }
 
