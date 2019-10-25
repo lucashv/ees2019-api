@@ -3,6 +3,7 @@ package br.ufpr.ees2019.ees2019api.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,10 @@ public class PedidoConverter implements Convertable<Pedido, PedidoDTO> {
         entity.setCliente(Optional.ofNullable(dto.getCliente())
                             .map(clienteConverter::convertToDomain)
                             .get());
+        
+        Optional.ofNullable(entity.getItens())
+            .orElse(Collections.emptyList())
+            .forEach(i -> i.setPedido(entity));
         
         return entity;
     }

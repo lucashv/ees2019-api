@@ -21,8 +21,7 @@ public abstract class BaseServiceImpl<TDTO, TENTITY, TID> implements BaseService
         return this.getConv().convertToDto(this.getRepo().save(entity));
     }
 
-    public void excluir(TID id) throws ServiceException {       
-        TENTITY c = this.getRepo().findById(id).orElse(null);        
+    public void excluir(TID id) throws ServiceException {
         this.getRepo().deleteById(id);     
     }
     

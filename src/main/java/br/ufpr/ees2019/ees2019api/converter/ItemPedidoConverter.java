@@ -21,12 +21,12 @@ public class ItemPedidoConverter implements Convertable<ItemPedido, ItemPedidoDT
         ItemPedido entity = new ItemPedido();
         
         entity.setId(dto.getId());
-        entity.setPedido(Optional.ofNullable(dto.getPedido())
-                            .map(pedidoConverter::convertToDomain)
-                            .get());
+        //entity.setPedido(Optional.ofNullable(dto.getPedido())
+        //                    .map(pedidoConverter::convertToDomain)
+        //                    .orElse(null));
         entity.setProduto(Optional.ofNullable(dto.getProduto())
                              .map(produtoConverter::convertToDomain)
-                             .get());
+                             .orElse(null));
         entity.setQuantidade(dto.getQuantidade());
         
         return entity;
@@ -37,9 +37,9 @@ public class ItemPedidoConverter implements Convertable<ItemPedido, ItemPedidoDT
         ItemPedidoDTO dto = new ItemPedidoDTO();
         
         dto.setId(entity.getId());
-        dto.setPedido(Optional.ofNullable(entity.getPedido())
-                            .map(pedidoConverter::convertToDto)
-                            .get());
+        //dto.setPedido(Optional.ofNullable(entity.getPedido())
+        //                    .map(pedidoConverter::convertToDto)
+        //                    .get());
         dto.setProduto(Optional.ofNullable(entity.getProduto())
                              .map(produtoConverter::convertToDto)
                              .get());

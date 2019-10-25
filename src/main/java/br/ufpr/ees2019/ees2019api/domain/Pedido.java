@@ -3,6 +3,7 @@ package br.ufpr.ees2019.ees2019api.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +29,7 @@ public class Pedido {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens;
 	
 	public Long getId() {
